@@ -6,6 +6,8 @@ This is a simple Solidity Smart Contract to help you send ETH to multiple accoun
 
 ## Requirements
 
+NOTE: These are previous requirements without the front end, where you can copy the code and put in the Remix IDE to test it out.
+
 - [Remix - Ethereum IDE] (remix-project.org)
   - You can check The Remix Documentation [Here] (https://remix-ide.readthedocs.io/)
 
