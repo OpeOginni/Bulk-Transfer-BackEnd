@@ -16,7 +16,7 @@ error BulkTransfer__NotOwner();
 contract BulkTransfer {
     // State Variables
     mapping(address => uint256) private s_addressToAmountDeposited;
-    mapping(address => address[]) private s_funderAddressToWinnersAddressArray;
+    mapping(address => address[15]) private s_funderAddressToWinnersAddressArray;
     address private immutable i_owner;
 
     // Constructor
@@ -33,7 +33,7 @@ contract BulkTransfer {
 
     //Adding Functions
 
-    function addWinnersAddress(address[] memory _winnerAddresses) public {
+    function addWinnersAddress(address[15] memory _winnerAddresses) public {
         //arrWinnersWalletAddress = winnerAddresses;
         s_funderAddressToWinnersAddressArray[msg.sender] = _winnerAddresses;
     } // Note when putting in the value for the winnerAddresses They should start with ["0x0000","0x00001","0x00002"]
@@ -48,7 +48,7 @@ contract BulkTransfer {
         uint256 i = 0;
         assert(1 ether == 1e18);
         assert(1 gwei == 1e9);
-        address[] memory arrWinnersAddress = s_funderAddressToWinnersAddressArray[msg.sender];
+        address[15] memory arrWinnersAddress = s_funderAddressToWinnersAddressArray[msg.sender];
 
         //Error Management
         if (s_funderAddressToWinnersAddressArray[msg.sender].length == 0)
@@ -64,9 +64,7 @@ contract BulkTransfer {
         ) revert BulkTransfer__TransferAmountMoreThanDeposit();
 
         for (i; i < arrWinnersAddress.length; i++) {
-            (bool sent, ) = arrWinnersAddress[i].call{//value: rewardValue * 1 gwei /* GWEI */
-
-            /* ETHER */
+            (bool sent, ) = arrWinnersAddress[i].call{/* ETHER */ //value: rewardValue * 1 gwei /* GWEI */
             value: rewardValue * 1 ether}("");
 
             //value: rewardValue
@@ -100,7 +98,7 @@ contract BulkTransfer {
         return s_funderAddressToWinnersAddressArray[msg.sender].length;
     }
 
-    function getWinnersList() public view returns (address[] memory) {
+    function getWinnersList() public view returns (address[15] memory) {
         return s_funderAddressToWinnersAddressArray[msg.sender];
     }
 
