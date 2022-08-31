@@ -64,8 +64,7 @@ contract BulkTransfer {
         ) revert BulkTransfer__TransferAmountMoreThanDeposit();
 
         for (i; i < arrWinnersAddress.length; i++) {
-            (bool sent, ) = arrWinnersAddress[i].call{/* GWEI */
-            //value: rewardValue * 1 gwei
+            (bool sent, ) = arrWinnersAddress[i].call{//value: rewardValue * 1 gwei /* GWEI */
 
             /* ETHER */
             value: rewardValue * 1 ether}("");
@@ -93,9 +92,6 @@ contract BulkTransfer {
 
     //Getter Functions
 
-    /** @notice Gets the amount that an address has deposited
-     *  @return the amount deposited to the contract
-     */
     function getAmountDeposited() public view returns (uint256) {
         return s_addressToAmountDeposited[msg.sender];
     }

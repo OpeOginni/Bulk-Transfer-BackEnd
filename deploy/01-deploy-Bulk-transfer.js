@@ -19,9 +19,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     log("Deploying BulkTransfer and waiting for confirmations...")
     const bulkTransfer = await deploy("BulkTransfer", {
         from: deployer,
-        arg: [
-            /*Address*/
-        ],
+        arg: [],
         log: true,
         waitConfirmations: waitBlockConfirmations,
     })
@@ -30,20 +28,20 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     // Verify the deployment
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...")
-        await verify(bulkTransfer.address)
+        await verify(bulkTransfer.address, []) //Leave empty Array when the contract has no Arguments
     }
 
     // Instructions to running scripts
     log("----------------------------------------------------")
 
     log("Fund Contract with command:")
-    const networkName01 = network.name == "hardhat" ? "localhost" : network.name
+    const networkName = network.name == "hardhat" ? "localhost" : network.name
     log(`yarn hardhat run scripts/fundContract.js --network ${networkName}`)
     log("----------------------------------------------------")
 
     log("Perform Bulk Transfer with command:")
-    const networkName02 = network.name == "hardhat" ? "localhost" : network.name
-    log(`yarn hardhat run scripts/bulkTransfer.js --network ${networkName}`)
+    const networkName01 = network.name == "hardhat" ? "localhost" : network.name
+    log(`yarn hardhat run scripts/bulkTransfer.js --network ${networkName01}`)
     log("----------------------------------------------------")
 }
 
