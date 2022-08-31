@@ -18,8 +18,8 @@ const networkConfig = {
 
 const developmentChains = ["hardhat", "localhost"]
 const VERIFICATION_BLOCK_CONFIRMATIONS = 6
-const frontEndContractsFile = "../Bulk-Transfer-FrontEnd/constants/contractAddresses.json"
-const frontEndAbiFile = "../Bulk-Transfer-FrontEnd/constants/abi.json"
+const frontEndContractsFile = "../bulk-transfer-frontend/constants/contractAddresses.json"
+const frontEndAbiFile = "../bulk-transfer-frontEnd/constants/abi.json"
 
 module.exports = {
     networkConfig,
